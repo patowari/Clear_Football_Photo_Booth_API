@@ -1,0 +1,128 @@
+{
+	"info": {
+		"_postman_id": "4b5d6e7f-8a9b-0c1d-2e3f-4a5b6c7d8e9f",
+		"name": "Clear Football Photo Booth API",
+		"description": "API collection for the Clear Football Photo Booth application. This API handles image background removal and frame overlaying.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/health",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"health"
+					]
+				},
+				"description": "Check if the server is up and running."
+			},
+			"response": []
+		},
+		{
+			"name": "Process Image",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "person_image",
+							"description": "The image of the person (JPG, JPEG, or PNG)",
+							"type": "file",
+							"src": []
+						},
+						{
+							"key": "name",
+							"value": "John Doe",
+							"description": "Name of the person",
+							"type": "text"
+						},
+						{
+							"key": "number",
+							"value": "1234567890",
+							"description": "Phone number or ID",
+							"type": "text"
+						},
+						{
+							"key": "image_set_background",
+							"value": "1",
+							"description": "Frame number (1-6)",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/process",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"process"
+					]
+				},
+				"description": "Uploads an image, removes its background, overlays it onto a selected frame, and generates a QR code for downloading."
+			},
+			"response": []
+		},
+		{
+			"name": "Download Processed Image",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/download/:filename",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"download",
+						":filename"
+					],
+					"variable": [
+						{
+							"key": "filename",
+							"value": "example_output.png",
+							"description": "The filename returned by the /process endpoint"
+						}
+					]
+				},
+				"description": "Downloads the final processed image with the QR code."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:5000",
+			"type": "string"
+		}
+	]
+}
