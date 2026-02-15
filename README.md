@@ -35,14 +35,19 @@ pip install -r requirements.txt
 ### 3. Setup
 The application requires a `frames/` directory containing images named `frame_1.png` through `frame_6.png` with dimensions 1536x1024.
 
-```bash
-# Start the server
-python app.py
-```
+### 4. Hosting on cPanel (Shared Hosting)
+1.  Upload all files to your cPanel directory (e.g., `public_html` or a subfolder).
+2.  In cPanel, go to **Setup Python App**.
+3.  Create a new application:
+    *   **Python version:** 3.11 or higher.
+    *   **Application root:** The folder where you uploaded the files.
+    *   **Application URL:** Your domain or subdomain.
+    *   **Application startup file:** `passenger_wsgi.py`.
+    *   **Application Entry point:** `application`.
+4.  Click **Run Pip Install** and select `requirements.txt`.
+5.  **Restart** the application.
 
-The server will be available at `http://localhost:5000`.
-
-## 📡 API Documentation
+The `passenger_wsgi.py` file is already included and configured to work with Phusion Passenger.
 
 ### Process Image
 `POST /process`

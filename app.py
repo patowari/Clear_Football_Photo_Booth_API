@@ -1,215 +1,295 @@
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, render_template, session as flask_session
+from flask_cors import CORS
 from werkzeug.utils import secure_filename
 import os
 import cv2
 import numpy as np
-from rembg import remove
+from rembg import remove, new_session
 from PIL import Image, ImageDraw, ImageFont
 import qrcode
 import uuid
 import io
+import logging
+import traceback
+
+# 1. SETUP LOGGING
+# In cPanel, logs are your best friend since you can't see the console easily.
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+logging.basicConfig(
+    filename=os.path.join(BASE_DIR, 'app_debug.log'),
+    level=logging.DEBUG,
+    format='%(asctime)s %(levelname)s: %(message)s'
+)
+logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
+app.secret_key = 'super-secret-clear-men-key-123'
+CORS(app)
 
-# Configuration
-UPLOAD_FOLDER = 'uploads'
-OUTPUT_FOLDER = 'outputs'
-FRAMES_FOLDER = 'frames'
+# 2. CONFIGURATION
+UPLOAD_FOLDER = os.path.join(BASE_DIR, 'uploads')
+OUTPUT_FOLDER = os.path.join(BASE_DIR, 'outputs')
+FRAMES_FOLDER = os.path.join(BASE_DIR, 'frames')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
-# Create necessary directories
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-os.makedirs(OUTPUT_FOLDER, exist_ok=True)
+# Ensure folders exist with correct permissions for web server
+for folder in [UPLOAD_FOLDER, OUTPUT_FOLDER, FRAMES_FOLDER]:
+    if not os.path.exists(folder):
+        os.makedirs(folder, mode=0o755, exist_ok=True)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['OUTPUT_FOLDER'] = OUTPUT_FOLDER
 app.config['FRAMES_FOLDER'] = FRAMES_FOLDER
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB limit
 
+# Global variable for the rembg session (renamed to avoid conflict with Flask session)
+rembg_session = None
+
+def get_session():
+    """Lazy-load the rembg session to prevent startup hangs"""
+    global rembg_session
+    if rembg_session is None:
+        try:
+            logger.info("Initializing Rembg session (u2netp)...")
+            # Using 'u2netp' because it's significantly smaller (4MB vs 170MB)
+            # and much faster to load/download on standard servers.
+            rembg_session = new_session("u2netp")
+            logger.info("Rembg session initialized successfully.")
+        except Exception as e:
+            logger.error(f"Failed to initialize Rembg session: {e}")
+    return rembg_session
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-
 def remove_background(image_path):
-    """Remove background from image using rembg with improved accuracy"""
-    with open(image_path, 'rb') as input_file:
-        input_image = input_file.read()
+    """Remove background from image with memory-safe optimizations"""
+    logger.info(f"Removing background for: {image_path}")
     
-    # Using alpha_matting for more accurate edges
-    output_image = remove(
-        input_image,
+    # Open image
+    img = Image.open(image_path)
+    
+    # OPTIMIZATION: If the uploaded image is significantly larger than our target,
+    # resize it down BEFORE background removal to save massive amounts of RAM.
+    max_dim = 2000 
+    if max(img.size) > max_dim:
+        logger.info(f"Image too large ({img.size}), resizing to {max_dim}px for processing...")
+        img.thumbnail((max_dim, max_dim), Image.Resampling.LANCZOS)
+    
+    # Convert to bytes for rembg
+    img_byte_arr = io.BytesIO()
+    img.save(img_byte_arr, format='PNG')
+    input_data = img_byte_arr.getvalue()
+    
+    # Process
+    output_data = remove(
+        input_data,
+        session=get_session(),
         alpha_matting=True,
         alpha_matting_foreground_threshold=240,
         alpha_matting_background_threshold=10,
         alpha_matting_erode_size=10
     )
-    return Image.open(io.BytesIO(output_image)).convert("RGBA")
-
+    
+    return Image.open(io.BytesIO(output_data)).convert("RGBA")
 
 def fit_person_to_frame(person_image, frame_image):
-    """Fit person image to frame (1536x1024) while maintaining strict aspect ratio"""
+    """Fit person to strict 1536x1024 frame while keeping aspect ratio intact"""
     target_width, target_height = 1536, 1024
     
-    # Ensure frame is the correct size
+    # 1. Prepare Frame (The Background)
     if frame_image.size != (target_width, target_height):
         frame_image = frame_image.resize((target_width, target_height), Image.Resampling.LANCZOS)
+    result = frame_image.copy().convert("RGBA")
     
-    # Calculate aspect ratios
+    # 2. Prepare Person (The Subject)
     person_width, person_height = person_image.size
     person_ratio = person_width / person_height
     target_ratio = target_width / target_height
     
-    # Resize person to fit within target frame while maintaining aspect ratio
+    # Calculate scale to fit within frame
     if person_ratio > target_ratio:
-        # Person is wider - scale by width
         new_width = target_width
         new_height = int(target_width / person_ratio)
     else:
-        # Person is taller - scale by height
         new_height = target_height
         new_width = int(target_height * person_ratio)
     
     person_resized = person_image.resize((new_width, new_height), Image.Resampling.LANCZOS)
     
-    # Create the result by starting with the frame as the base background
-    result = frame_image.copy().convert("RGBA")
-    
-    # Center the person on the frame
+    # 3. Overlay (Center the person)
     x_offset = (target_width - new_width) // 2
     y_offset = (target_height - new_height) // 2
     
-    # Paste person image on top of the frame at center
     result.paste(person_resized, (x_offset, y_offset), person_resized)
-    
     return result
 
-
-def generate_qr_code(download_url, size=150):
+def generate_qr_code(download_url):
     """Generate QR code for download URL"""
-    qr = qrcode.QRCode(
-        version=1,
-        error_correction=qrcode.constants.ERROR_CORRECT_L,
-        box_size=10,
-        border=2,
-    )
+    qr = qrcode.QRCode(version=1, box_size=10, border=2)
     qr.add_data(download_url)
     qr.make(fit=True)
-    
-    qr_image = qr.make_image(fill_color="black", back_color="white")
-    qr_image = qr_image.resize((size, size), Image.Resampling.LANCZOS)
-    return qr_image.convert("RGBA")
-
-
-def add_qr_to_image(image, qr_code, margin=20):
-    """Add QR code to bottom right of image"""
-    img_width, img_height = image.size
-    qr_width, qr_height = qr_code.size
-    
-    # Calculate bottom right position
-    x = img_width - qr_width - margin
-    y = img_height - qr_height - margin
-    
-    # Paste QR code
-    image.paste(qr_code, (x, y), qr_code)
-    return image
-
+    qr_img = qr.make_image(fill_color="black", back_color="white").resize((150, 150))
+    return qr_img.convert("RGBA")
 
 @app.route('/process', methods=['POST'])
 def process_image():
+    input_path = None
     try:
-        # Validate request
+        # 1. Validation
         if 'person_image' not in request.files:
             return jsonify({'error': 'No image file provided'}), 400
         
-        name = request.form.get('name', 'User')
-        number = request.form.get('number', '')
-        image_set_background = request.form.get('image_set_background', '1')
-        
         person_file = request.files['person_image']
-        
         if person_file.filename == '':
             return jsonify({'error': 'No selected file'}), 400
         
         if not allowed_file(person_file.filename):
-            return jsonify({'error': 'Invalid file type'}), 400
+            return jsonify({'error': 'Invalid file type. Use JPG or PNG.'}), 400
+            
+        bg_choice = request.form.get('image_set_background', '1')
         
-        # Save uploaded file
-        filename = secure_filename(person_file.filename)
+        # 2. Save Upload
         unique_id = str(uuid.uuid4())[:8]
-        input_path = os.path.join(app.config['UPLOAD_FOLDER'], f"{unique_id}_{filename}")
+        filename = secure_filename(f"{unique_id}_{person_file.filename}")
+        input_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         person_file.save(input_path)
         
-        # Remove background from user image
+        # 3. Background Removal
         person_no_bg = remove_background(input_path)
         
-        # Load frame
-        frame_number = int(image_set_background)
-        if frame_number < 1 or frame_number > 6:
-            frame_number = 1
-        
-        frame_path = os.path.join(app.config['FRAMES_FOLDER'], f'frame_{frame_number}.png')
-        
+        # 4. Load Frame
+        frame_path = os.path.join(app.config['FRAMES_FOLDER'], f'frame_{bg_choice}.png')
         if not os.path.exists(frame_path):
-            return jsonify({'error': f'Frame {frame_number} not found'}), 404
+            # Fallback to frame 1 if not found
+            frame_path = os.path.join(app.config['FRAMES_FOLDER'], 'frame_1.png')
+            
+        if not os.path.exists(frame_path):
+            return jsonify({'error': 'Background frame not found on server'}), 404
+            
+        frame_image = Image.open(frame_path)
         
-        frame_image = Image.open(frame_path).convert("RGBA")
+        # 5. Composite
+        final_image = fit_person_to_frame(person_no_bg, frame_image)
         
-        # Fit person to frame and overlay frame on top
-        result_image = fit_person_to_frame(person_no_bg, frame_image)
-        
-        # Generate output filename
+        # 6. Add QR Code
+        base_url = request.host_url.rstrip('/')
         output_filename = f"{unique_id}_output.png"
+        qr_code = generate_qr_code(f"{base_url}/download/{output_filename}")
+        
+        # Position QR at bottom right
+        img_w, img_h = final_image.size
+        qr_w, qr_h = qr_code.size
+        final_image.paste(qr_code, (img_w - qr_w - 20, img_h - qr_h - 20), qr_code)
+        
+        # 7. Final Conversion and Save
+        # Ensure RGB format for standard PNG compatibility
+        final_rgb = Image.new('RGB', final_image.size, (255, 255, 255))
+        final_rgb.paste(final_image, mask=final_image.split()[3])
+        
         output_path = os.path.join(app.config['OUTPUT_FOLDER'], output_filename)
-        
-        # Generate QR code with download URL
-        download_url = f"http://localhost:5000/download/{output_filename}"
-        qr_code = generate_qr_code(download_url)
-        
-        # Add QR code to bottom right
-        final_image = add_qr_to_image(result_image, qr_code)
-        
-        # Convert to RGB for PNG saving (remove alpha channel for final output)
-        final_image_rgb = Image.new('RGB', final_image.size, (255, 255, 255))
-        final_image_rgb.paste(final_image, mask=final_image.split()[3] if len(final_image.split()) == 4 else None)
-        
-        # Save final image
-        final_image_rgb.save(output_path, 'PNG')
-        
-        # Clean up uploaded file
-        os.remove(input_path)
+        final_rgb.save(output_path, 'PNG')
         
         return jsonify({
             'success': True,
-            'message': 'Image processed successfully',
-            'name': name,
-            'number': number,
             'output_file': output_filename,
-            'download_url': download_url
-        }), 200
+            'download_url': f"{base_url}/download/{output_filename}"
+        })
         
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
+        error_msg = traceback.format_exc()
+        logger.error(f"Processing Error:\n{error_msg}")
+        return jsonify({'error': str(e), 'details': 'Check app_debug.log on server'}), 500
+    
+    finally:
+        # Cleanup upload to save space on cPanel
+        # Commeted out as per user request to keep original images
+        # if input_path and os.path.exists(input_path):
+        #     os.remove(input_path)
+        pass
 
 @app.route('/download/<filename>', methods=['GET'])
 def download_file(filename):
+    file_path = os.path.join(app.config['OUTPUT_FOLDER'], filename)
+    if not os.path.exists(file_path):
+        return jsonify({'error': 'File not found'}), 404
+    
+    # Allow inline viewing for the admin panel
+    as_attachment = request.args.get('inline') != 'true'
+    return send_file(file_path, as_attachment=as_attachment)
+
+@app.route('/view-upload/<filename>', methods=['GET'])
+def view_upload(filename):
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    if not os.path.exists(file_path):
+        return jsonify({'error': 'File not found'}), 404
+    
+    # Allow inline viewing for the admin panel
+    as_attachment = request.args.get('inline') != 'true'
+    return send_file(file_path, as_attachment=as_attachment)
+
+@app.route('/health', methods=['GET'])
+def health():
+    return jsonify({'status': 'online', 'memory_info': 'Check cPanel dashboard'}), 200
+
+# --- ADMIN PANEL ROUTES ---
+
+@app.route('/admin')
+def admin_page():
+    return render_template('admin.html')
+
+@app.route('/api/admin/login', methods=['POST'])
+def admin_login():
+    data = request.json
+    email = data.get('email')
+    password = data.get('password')
+    
+    if email == "admin@clearmen.xri" and password == "ADMINclear":
+        flask_session['admin_logged_in'] = True
+        return jsonify({'success': True})
+    return jsonify({'success': False, 'message': 'Invalid credentials'}), 401
+
+@app.route('/api/admin/images', methods=['GET'])
+def list_images():
+    if not flask_session.get('admin_logged_in'):
+        return jsonify({'error': 'Unauthorized'}), 401
+        
     try:
-        file_path = os.path.join(app.config['OUTPUT_FOLDER'], filename)
+        outputs = []
+        for filename in os.listdir(app.config['OUTPUT_FOLDER']):
+            if filename.lower().endswith(('.png', '.jpg', '.jpeg')):
+                file_path = os.path.join(app.config['OUTPUT_FOLDER'], filename)
+                outputs.append({
+                    'filename': filename,
+                    'url': f"/download/{filename}",
+                    'timestamp': os.path.getmtime(file_path)
+                })
         
-        if not os.path.exists(file_path):
-            return jsonify({'error': 'File not found'}), 404
+        uploads = []
+        for filename in os.listdir(app.config['UPLOAD_FOLDER']):
+            if filename.lower().endswith(('.png', '.jpg', '.jpeg')):
+                file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                uploads.append({
+                    'filename': filename,
+                    'url': f"/view-upload/{filename}",
+                    'timestamp': os.path.getmtime(file_path)
+                })
         
-        return send_file(file_path, mimetype='image/png', as_attachment=True, download_name=filename)
+        # Sort both by timestamp descending (newest first)
+        outputs.sort(key=lambda x: x['timestamp'], reverse=True)
+        uploads.sort(key=lambda x: x['timestamp'], reverse=True)
         
+        return jsonify({
+            'outputs': outputs,
+            'uploads': uploads
+        })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-
-@app.route('/health', methods=['GET'])
-def health_check():
-    return jsonify({'status': 'healthy'}), 200
-
+@app.route('/api/admin/logout', methods=['POST'])
+def admin_logout():
+    flask_session.pop('admin_logged_in', None)
+    return jsonify({'success': True})
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, port=5000)

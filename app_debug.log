@@ -1,0 +1,157 @@
+2026-02-10 14:48:24,377 INFO: Application starting...
+2026-02-10 14:48:24,413 WARNING:  * Debugger is active!
+2026-02-10 14:48:24,418 INFO:  * Debugger PIN: 101-985-682
+2026-02-10 14:56:20,335 INFO:  * Detected change in 'E:\\XRI\\clear_football-photboth\\passenger_wsgi.py', reloading
+2026-02-10 14:56:23,227 INFO: Application starting...
+2026-02-10 14:56:23,254 WARNING:  * Debugger is active!
+2026-02-10 14:56:23,260 INFO:  * Debugger PIN: 101-985-682
+2026-02-10 15:04:49,835 INFO:  * Detected change in 'E:\\XRI\\clear_football-photboth\\app.py', reloading
+2026-02-10 15:04:53,471 INFO: Initializing Rembg session...
+2026-02-10 15:04:54,401 INFO: Session initialized with model: u2net
+2026-02-10 15:04:54,424 WARNING:  * Debugger is active!
+2026-02-10 15:04:54,429 INFO:  * Debugger PIN: 101-985-682
+2026-02-10 15:04:57,570 INFO:  * Detected change in 'E:\\XRI\\clear_football-photboth\\passenger_wsgi.py', reloading
+2026-02-10 15:05:00,773 INFO: Initializing Rembg session...
+2026-02-10 15:05:01,879 INFO: Session initialized with model: u2net
+2026-02-10 15:05:01,919 WARNING:  * Debugger is active!
+2026-02-10 15:05:01,924 INFO:  * Debugger PIN: 101-985-682
+2026-02-15 13:34:16,447 INFO: Initializing Rembg session...
+2026-02-15 13:39:12,279 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-02-15 13:39:12,279 INFO: [33mPress CTRL+C to quit[0m
+2026-02-15 13:39:12,281 INFO:  * Restarting with stat
+2026-02-15 13:39:14,662 WARNING:  * Debugger is active!
+2026-02-15 13:39:14,666 INFO:  * Debugger PIN: 101-985-682
+2026-02-15 13:39:28,374 INFO: 127.0.0.1 - - [15/Feb/2026 13:39:28] "GET /admin HTTP/1.1" 200 -
+2026-02-15 13:39:28,532 INFO: 127.0.0.1 - - [15/Feb/2026 13:39:28] "[35m[1mGET /api/admin/images HTTP/1.1[0m" 500 -
+2026-02-15 13:39:28,598 INFO: 127.0.0.1 - - [15/Feb/2026 13:39:28] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-02-15 13:39:49,663 INFO: 127.0.0.1 - - [15/Feb/2026 13:39:49] "[35m[1mPOST /api/admin/login HTTP/1.1[0m" 500 -
+2026-02-15 13:39:56,591 INFO: 127.0.0.1 - - [15/Feb/2026 13:39:56] "[35m[1mPOST /api/admin/login HTTP/1.1[0m" 500 -
+2026-02-15 13:40:26,445 INFO:  * Detected change in 'E:\\XRI\\clear_football-photboth\\app.py', reloading
+2026-02-15 13:40:26,743 INFO:  * Restarting with stat
+2026-02-15 13:40:29,116 WARNING:  * Debugger is active!
+2026-02-15 13:40:29,120 INFO:  * Debugger PIN: 101-985-682
+2026-02-15 13:40:54,803 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-02-15 13:40:54,803 INFO: [33mPress CTRL+C to quit[0m
+2026-02-15 13:40:54,806 INFO:  * Restarting with stat
+2026-02-15 13:40:57,124 WARNING:  * Debugger is active!
+2026-02-15 13:40:57,128 INFO:  * Debugger PIN: 101-985-682
+2026-02-15 13:41:05,432 INFO: 127.0.0.1 - - [15/Feb/2026 13:41:05] "POST /api/admin/login HTTP/1.1" 200 -
+2026-02-15 13:41:05,443 INFO: 127.0.0.1 - - [15/Feb/2026 13:41:05] "GET /api/admin/images HTTP/1.1" 200 -
+2026-02-15 13:41:05,817 INFO: 127.0.0.1 - - [15/Feb/2026 13:41:05] "GET /download/dc16814e_output.png?inline=true HTTP/1.1" 200 -
+2026-02-15 13:41:05,827 INFO: 127.0.0.1 - - [15/Feb/2026 13:41:05] "GET /download/c7e266a1_output.png?inline=true HTTP/1.1" 200 -
+2026-02-15 13:41:05,847 INFO: 127.0.0.1 - - [15/Feb/2026 13:41:05] "GET /download/9fa52276_output.png?inline=true HTTP/1.1" 200 -
+2026-02-15 13:41:05,854 INFO: 127.0.0.1 - - [15/Feb/2026 13:41:05] "GET /download/89f84e17_output.png?inline=true HTTP/1.1" 200 -
+2026-02-15 13:41:05,855 INFO: 127.0.0.1 - - [15/Feb/2026 13:41:05] "GET /download/6fff5a61_output.png?inline=true HTTP/1.1" 200 -
+2026-02-15 13:41:05,857 INFO: 127.0.0.1 - - [15/Feb/2026 13:41:05] "GET /download/990b0394_output.png?inline=true HTTP/1.1" 200 -
+2026-02-15 13:41:05,877 INFO: 127.0.0.1 - - [15/Feb/2026 13:41:05] "GET /download/39f79ad7_output.png?inline=true HTTP/1.1" 200 -
+2026-02-15 13:41:05,883 INFO: 127.0.0.1 - - [15/Feb/2026 13:41:05] "GET /download/0408a599_output.png?inline=true HTTP/1.1" 200 -
+2026-02-15 13:41:09,701 INFO: 127.0.0.1 - - [15/Feb/2026 13:41:09] "GET /download/c7e266a1_output.png HTTP/1.1" 200 -
+2026-02-15 13:41:17,895 INFO: 127.0.0.1 - - [15/Feb/2026 13:41:17] "GET /api/admin/images HTTP/1.1" 200 -
+2026-02-15 13:41:17,915 INFO: 127.0.0.1 - - [15/Feb/2026 13:41:17] "[36mGET /download/9fa52276_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:41:17,917 INFO: 127.0.0.1 - - [15/Feb/2026 13:41:17] "[36mGET /download/39f79ad7_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:41:17,920 INFO: 127.0.0.1 - - [15/Feb/2026 13:41:17] "[36mGET /download/c7e266a1_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:41:17,925 INFO: 127.0.0.1 - - [15/Feb/2026 13:41:17] "[36mGET /download/dc16814e_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:41:17,934 INFO: 127.0.0.1 - - [15/Feb/2026 13:41:17] "[36mGET /download/6fff5a61_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:41:17,935 INFO: 127.0.0.1 - - [15/Feb/2026 13:41:17] "[36mGET /download/990b0394_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:41:17,942 INFO: 127.0.0.1 - - [15/Feb/2026 13:41:17] "[36mGET /download/89f84e17_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:41:17,953 INFO: 127.0.0.1 - - [15/Feb/2026 13:41:17] "[36mGET /download/0408a599_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:42:04,933 INFO: 127.0.0.1 - - [15/Feb/2026 13:42:04] "[36mGET /download/dc16814e_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:42:39,287 INFO:  * Detected change in 'E:\\XRI\\clear_football-photboth\\app.py', reloading
+2026-02-15 13:42:39,720 INFO:  * Restarting with stat
+2026-02-15 13:42:42,754 WARNING:  * Debugger is active!
+2026-02-15 13:42:42,759 INFO:  * Debugger PIN: 101-985-682
+2026-02-15 13:42:53,748 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-02-15 13:42:53,749 INFO: [33mPress CTRL+C to quit[0m
+2026-02-15 13:42:53,753 INFO:  * Restarting with stat
+2026-02-15 13:42:56,973 WARNING:  * Debugger is active!
+2026-02-15 13:42:56,977 INFO:  * Debugger PIN: 101-985-682
+2026-02-15 13:42:58,663 INFO: 127.0.0.1 - - [15/Feb/2026 13:42:58] "GET /admin HTTP/1.1" 200 -
+2026-02-15 13:42:58,702 INFO: 127.0.0.1 - - [15/Feb/2026 13:42:58] "GET /api/admin/images HTTP/1.1" 200 -
+2026-02-15 13:42:59,897 INFO: 127.0.0.1 - - [15/Feb/2026 13:42:59] "POST /api/admin/login HTTP/1.1" 200 -
+2026-02-15 13:42:59,905 INFO: 127.0.0.1 - - [15/Feb/2026 13:42:59] "GET /api/admin/images HTTP/1.1" 200 -
+2026-02-15 13:43:00,146 INFO: 127.0.0.1 - - [15/Feb/2026 13:43:00] "[36mGET /download/39f79ad7_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:43:00,157 INFO: 127.0.0.1 - - [15/Feb/2026 13:43:00] "[36mGET /download/9fa52276_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:43:00,169 INFO: 127.0.0.1 - - [15/Feb/2026 13:43:00] "[36mGET /download/89f84e17_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:43:00,186 INFO: 127.0.0.1 - - [15/Feb/2026 13:43:00] "[36mGET /download/990b0394_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:43:00,190 INFO: 127.0.0.1 - - [15/Feb/2026 13:43:00] "[36mGET /download/6fff5a61_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:43:00,202 INFO: 127.0.0.1 - - [15/Feb/2026 13:43:00] "[36mGET /download/0408a599_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:43:00,208 INFO: 127.0.0.1 - - [15/Feb/2026 13:43:00] "[36mGET /download/c7e266a1_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:43:00,211 INFO: 127.0.0.1 - - [15/Feb/2026 13:43:00] "[36mGET /download/dc16814e_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:43:35,917 INFO: Removing background for: E:\XRI\clear_football-photboth\uploads\488cc51a_WhatsApp_Image_2026-02-08_at_10.22.24_AM.jpeg
+2026-02-15 13:43:36,372 INFO: Initializing Rembg session (u2netp)...
+2026-02-15 13:43:36,538 DEBUG: Starting new HTTPS connection (1): github.com:443
+2026-02-15 13:43:38,130 DEBUG: https://github.com:443 "GET /danielgatis/rembg/releases/download/v0.0.0/u2netp.onnx HTTP/1.1" 302 0
+2026-02-15 13:43:38,132 DEBUG: Starting new HTTPS connection (1): release-assets.githubusercontent.com:443
+2026-02-15 13:43:40,213 DEBUG: https://release-assets.githubusercontent.com:443 "GET /github-production-release-asset/286500101/e0a1ddb2-46c2-4911-9bae-f86584dc35be?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-02-15T19%3A28%3A05Z&rscd=attachment%3B+filename%3Du2netp.onnx&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-02-15T18%3A27%3A28Z&ske=2026-02-15T19%3A28%3A05Z&sks=b&skv=2018-11-09&sig=t7OgHNrCpLxb76ZZzY2reYxKlE2bRXeIUY6%2FdyLSnvw%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc3MTE4MTMxNywibmJmIjoxNzcxMTgxMDE3LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.LZkpp0BRuv2KEPTp-cPLTO7fGpxUKmAvkQeaz30Hzf8&response-content-disposition=attachment%3B%20filename%3Du2netp.onnx&response-content-type=application%2Foctet-stream HTTP/1.1" 200 4574861
+2026-02-15 13:43:48,289 INFO: Rembg session initialized successfully.
+2026-02-15 13:43:48,289 DEBUG: STREAM b'IHDR' 16 13
+2026-02-15 13:43:48,289 DEBUG: STREAM b'IDAT' 41 65536
+2026-02-15 13:43:53,987 DEBUG: STREAM b'IHDR' 16 13
+2026-02-15 13:43:53,987 DEBUG: STREAM b'IDAT' 41 65536
+2026-02-15 13:43:54,035 DEBUG: STREAM b'IHDR' 16 13
+2026-02-15 13:43:54,035 DEBUG: STREAM b'caBX' 41 85497
+2026-02-15 13:43:54,035 DEBUG: b'caBX' 41 85497 (unknown)
+2026-02-15 13:43:54,035 DEBUG: STREAM b'IDAT' 85550 65536
+2026-02-15 13:43:55,071 INFO: 127.0.0.1 - - [15/Feb/2026 13:43:55] "POST /process HTTP/1.1" 200 -
+2026-02-15 13:44:02,610 INFO: 127.0.0.1 - - [15/Feb/2026 13:44:02] "GET /api/admin/images HTTP/1.1" 200 -
+2026-02-15 13:44:02,639 INFO: 127.0.0.1 - - [15/Feb/2026 13:44:02] "GET /download/488cc51a_output.png?inline=true HTTP/1.1" 200 -
+2026-02-15 13:44:54,331 INFO:  * Detected change in 'E:\\XRI\\clear_football-photboth\\app.py', reloading
+2026-02-15 13:44:54,925 INFO:  * Restarting with stat
+2026-02-15 13:44:57,634 WARNING:  * Debugger is active!
+2026-02-15 13:44:57,639 INFO:  * Debugger PIN: 101-985-682
+2026-02-15 13:45:32,260 INFO: 127.0.0.1 - - [15/Feb/2026 13:45:32] "GET /admin HTTP/1.1" 200 -
+2026-02-15 13:45:32,290 INFO: 127.0.0.1 - - [15/Feb/2026 13:45:32] "GET /api/admin/images HTTP/1.1" 200 -
+2026-02-15 13:45:33,493 INFO: 127.0.0.1 - - [15/Feb/2026 13:45:33] "POST /api/admin/login HTTP/1.1" 200 -
+2026-02-15 13:45:33,513 INFO: 127.0.0.1 - - [15/Feb/2026 13:45:33] "GET /api/admin/images HTTP/1.1" 200 -
+2026-02-15 13:45:33,747 INFO: 127.0.0.1 - - [15/Feb/2026 13:45:33] "[36mGET /download/488cc51a_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:45:33,753 INFO: 127.0.0.1 - - [15/Feb/2026 13:45:33] "[36mGET /download/990b0394_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:45:33,761 INFO: 127.0.0.1 - - [15/Feb/2026 13:45:33] "[36mGET /download/89f84e17_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:45:33,767 INFO: 127.0.0.1 - - [15/Feb/2026 13:45:33] "[36mGET /download/0408a599_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:45:33,768 INFO: 127.0.0.1 - - [15/Feb/2026 13:45:33] "[36mGET /download/9fa52276_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:45:33,776 INFO: 127.0.0.1 - - [15/Feb/2026 13:45:33] "[36mGET /download/dc16814e_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:45:33,798 INFO: 127.0.0.1 - - [15/Feb/2026 13:45:33] "[36mGET /download/39f79ad7_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:45:33,803 INFO: 127.0.0.1 - - [15/Feb/2026 13:45:33] "[36mGET /download/6fff5a61_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:45:33,807 INFO: 127.0.0.1 - - [15/Feb/2026 13:45:33] "[36mGET /download/c7e266a1_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:45:34,941 INFO: 127.0.0.1 - - [15/Feb/2026 13:45:34] "GET /view-upload/488cc51a_WhatsApp_Image_2026-02-08_at_10.22.24_AM.jpeg?inline=true HTTP/1.1" 200 -
+2026-02-15 13:45:36,568 INFO: 127.0.0.1 - - [15/Feb/2026 13:45:36] "[36mGET /view-upload/488cc51a_WhatsApp_Image_2026-02-08_at_10.22.24_AM.jpeg?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:45:41,543 INFO: 127.0.0.1 - - [15/Feb/2026 13:45:41] "[36mGET /download/9fa52276_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:45:45,880 INFO: 127.0.0.1 - - [15/Feb/2026 13:45:45] "[36mGET /download/39f79ad7_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:46:09,489 INFO: Removing background for: E:\XRI\clear_football-photboth\uploads\9cffc9af_styleswap-black-leather-biker.png
+2026-02-15 13:46:09,532 DEBUG: STREAM b'IHDR' 16 13
+2026-02-15 13:46:09,532 DEBUG: STREAM b'caBX' 41 23151
+2026-02-15 13:46:09,532 DEBUG: b'caBX' 41 23151 (unknown)
+2026-02-15 13:46:09,532 DEBUG: STREAM b'IDAT' 23204 8192
+2026-02-15 13:46:10,449 INFO: Initializing Rembg session (u2netp)...
+2026-02-15 13:46:10,676 INFO: Rembg session initialized successfully.
+2026-02-15 13:46:10,676 DEBUG: STREAM b'IHDR' 16 13
+2026-02-15 13:46:10,676 DEBUG: STREAM b'IDAT' 41 65536
+2026-02-15 13:46:13,135 DEBUG: STREAM b'IHDR' 16 13
+2026-02-15 13:46:13,135 DEBUG: STREAM b'IDAT' 41 65536
+2026-02-15 13:46:13,172 DEBUG: STREAM b'IHDR' 16 13
+2026-02-15 13:46:13,172 DEBUG: STREAM b'caBX' 41 85497
+2026-02-15 13:46:13,173 DEBUG: b'caBX' 41 85497 (unknown)
+2026-02-15 13:46:13,173 DEBUG: STREAM b'IDAT' 85550 65536
+2026-02-15 13:46:14,404 INFO: 127.0.0.1 - - [15/Feb/2026 13:46:14] "POST /process HTTP/1.1" 200 -
+2026-02-15 13:46:19,722 INFO: 127.0.0.1 - - [15/Feb/2026 13:46:19] "GET /api/admin/images HTTP/1.1" 200 -
+2026-02-15 13:46:19,749 INFO: 127.0.0.1 - - [15/Feb/2026 13:46:19] "GET /download/9cffc9af_output.png?inline=true HTTP/1.1" 200 -
+2026-02-15 13:46:21,868 INFO: 127.0.0.1 - - [15/Feb/2026 13:46:21] "[36mGET /download/9cffc9af_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 13:46:43,551 INFO: Removing background for: E:\XRI\clear_football-photboth\uploads\5350a92e_styleswap-black-leather-biker.png
+2026-02-15 13:46:43,572 DEBUG: STREAM b'IHDR' 16 13
+2026-02-15 13:46:43,573 DEBUG: STREAM b'caBX' 41 23151
+2026-02-15 13:46:43,573 DEBUG: b'caBX' 41 23151 (unknown)
+2026-02-15 13:46:43,573 DEBUG: STREAM b'IDAT' 23204 8192
+2026-02-15 13:46:44,582 DEBUG: STREAM b'IHDR' 16 13
+2026-02-15 13:46:44,582 DEBUG: STREAM b'IDAT' 41 65536
+2026-02-15 13:46:46,909 DEBUG: STREAM b'IHDR' 16 13
+2026-02-15 13:46:46,909 DEBUG: STREAM b'IDAT' 41 65536
+2026-02-15 13:46:46,943 DEBUG: STREAM b'IHDR' 16 13
+2026-02-15 13:46:46,943 DEBUG: STREAM b'caBX' 41 89728
+2026-02-15 13:46:46,943 DEBUG: b'caBX' 41 89728 (unknown)
+2026-02-15 13:46:46,943 DEBUG: STREAM b'IDAT' 89781 65536
+2026-02-15 13:46:48,047 INFO: 127.0.0.1 - - [15/Feb/2026 13:46:48] "POST /process HTTP/1.1" 200 -
+2026-02-15 13:46:50,116 INFO: 127.0.0.1 - - [15/Feb/2026 13:46:50] "GET /api/admin/images HTTP/1.1" 200 -
+2026-02-15 13:46:50,161 INFO: 127.0.0.1 - - [15/Feb/2026 13:46:50] "GET /download/5350a92e_output.png?inline=true HTTP/1.1" 200 -
+2026-02-15 13:46:52,719 INFO: 127.0.0.1 - - [15/Feb/2026 13:46:52] "[36mGET /download/5350a92e_output.png?inline=true HTTP/1.1[0m" 304 -
