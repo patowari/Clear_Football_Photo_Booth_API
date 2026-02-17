@@ -155,3 +155,192 @@
 2026-02-15 13:46:50,116 INFO: 127.0.0.1 - - [15/Feb/2026 13:46:50] "GET /api/admin/images HTTP/1.1" 200 -
 2026-02-15 13:46:50,161 INFO: 127.0.0.1 - - [15/Feb/2026 13:46:50] "GET /download/5350a92e_output.png?inline=true HTTP/1.1" 200 -
 2026-02-15 13:46:52,719 INFO: 127.0.0.1 - - [15/Feb/2026 13:46:52] "[36mGET /download/5350a92e_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 14:06:26,320 INFO:  * Detected change in 'E:\\XRI\\clear_football-photboth\\app.py', reloading
+2026-02-15 14:06:26,897 INFO:  * Restarting with stat
+2026-02-15 14:06:30,593 WARNING:  * Debugger is active!
+2026-02-15 14:06:30,599 INFO:  * Debugger PIN: 101-985-682
+2026-02-15 14:07:14,606 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-02-15 14:07:14,606 INFO: [33mPress CTRL+C to quit[0m
+2026-02-15 14:07:14,608 INFO:  * Restarting with stat
+2026-02-15 14:07:17,031 WARNING:  * Debugger is active!
+2026-02-15 14:07:17,035 INFO:  * Debugger PIN: 101-985-682
+2026-02-15 14:07:18,542 INFO: 127.0.0.1 - - [15/Feb/2026 14:07:18] "GET /admin HTTP/1.1" 200 -
+2026-02-15 14:07:18,574 INFO: 127.0.0.1 - - [15/Feb/2026 14:07:18] "GET /api/admin/images HTTP/1.1" 200 -
+2026-02-15 14:07:20,993 INFO: 127.0.0.1 - - [15/Feb/2026 14:07:20] "POST /api/admin/login HTTP/1.1" 200 -
+2026-02-15 14:07:20,999 INFO: 127.0.0.1 - - [15/Feb/2026 14:07:20] "GET /api/admin/images HTTP/1.1" 200 -
+2026-02-15 14:07:21,262 INFO: 127.0.0.1 - - [15/Feb/2026 14:07:21] "[36mGET /download/9fa52276_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 14:07:21,291 INFO: 127.0.0.1 - - [15/Feb/2026 14:07:21] "[36mGET /download/dc16814e_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 14:07:21,295 INFO: 127.0.0.1 - - [15/Feb/2026 14:07:21] "[36mGET /download/5350a92e_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 14:07:21,301 INFO: 127.0.0.1 - - [15/Feb/2026 14:07:21] "[36mGET /download/9cffc9af_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 14:07:21,306 INFO: 127.0.0.1 - - [15/Feb/2026 14:07:21] "[36mGET /download/488cc51a_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 14:07:21,313 INFO: 127.0.0.1 - - [15/Feb/2026 14:07:21] "[36mGET /download/39f79ad7_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 14:07:21,316 INFO: 127.0.0.1 - - [15/Feb/2026 14:07:21] "[36mGET /download/c7e266a1_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 14:07:21,326 INFO: 127.0.0.1 - - [15/Feb/2026 14:07:21] "[36mGET /download/6fff5a61_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 14:07:21,333 INFO: 127.0.0.1 - - [15/Feb/2026 14:07:21] "[36mGET /download/990b0394_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 14:07:21,343 INFO: 127.0.0.1 - - [15/Feb/2026 14:07:21] "[36mGET /download/89f84e17_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 14:07:21,351 INFO: 127.0.0.1 - - [15/Feb/2026 14:07:21] "[36mGET /download/0408a599_output.png?inline=true HTTP/1.1[0m" 304 -
+2026-02-15 14:07:39,757 INFO: 127.0.0.1 - - [15/Feb/2026 14:07:39] "POST /api/admin/delete-images HTTP/1.1" 200 -
+2026-02-15 14:07:39,767 INFO: 127.0.0.1 - - [15/Feb/2026 14:07:39] "GET /api/admin/images HTTP/1.1" 200 -
+2026-02-15 14:07:42,450 INFO: 127.0.0.1 - - [15/Feb/2026 14:07:42] "GET /api/admin/images HTTP/1.1" 200 -
+2026-02-15 15:20:57,656 INFO: 127.0.0.1 - - [15/Feb/2026 15:20:57] "[33mGET /api/news?category=politics&limit=6 HTTP/1.1[0m" 404 -
+2026-02-15 15:20:57,660 INFO: 127.0.0.1 - - [15/Feb/2026 15:20:57] "[33mGET /api/news?category=national&limit=6 HTTP/1.1[0m" 404 -
+2026-02-15 15:20:57,680 INFO: 127.0.0.1 - - [15/Feb/2026 15:20:57] "[33mGET /api/news?category=international&limit=6 HTTP/1.1[0m" 404 -
+2026-02-15 15:20:57,685 INFO: 127.0.0.1 - - [15/Feb/2026 15:20:57] "[33mGET /api/news?category=sports&limit=6 HTTP/1.1[0m" 404 -
+2026-02-15 15:20:59,310 INFO: 127.0.0.1 - - [15/Feb/2026 15:20:59] "[33mGET /api/news?category=national&limit=6 HTTP/1.1[0m" 404 -
+2026-02-15 15:20:59,615 INFO: 127.0.0.1 - - [15/Feb/2026 15:20:59] "[33mGET /api/news?category=politics&limit=6 HTTP/1.1[0m" 404 -
+2026-02-15 15:20:59,617 INFO: 127.0.0.1 - - [15/Feb/2026 15:20:59] "[33mGET /api/news?category=international&limit=6 HTTP/1.1[0m" 404 -
+2026-02-15 15:20:59,619 INFO: 127.0.0.1 - - [15/Feb/2026 15:20:59] "[33mGET /api/news?category=sports&limit=6 HTTP/1.1[0m" 404 -
+2026-02-16 15:34:43,290 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-02-16 15:34:43,290 INFO: [33mPress CTRL+C to quit[0m
+2026-02-16 15:34:43,293 INFO:  * Restarting with stat
+2026-02-16 15:34:45,727 WARNING:  * Debugger is active!
+2026-02-16 15:34:45,739 INFO:  * Debugger PIN: 101-985-682
+2026-02-16 15:36:13,276 INFO: Removing background for: E:\XRI\clear_football-photboth\uploads\bb09c5c9_styleswap-black-leather-biker.png
+2026-02-16 15:36:13,374 DEBUG: STREAM b'IHDR' 16 13
+2026-02-16 15:36:13,374 DEBUG: STREAM b'caBX' 41 23151
+2026-02-16 15:36:13,374 DEBUG: b'caBX' 41 23151 (unknown)
+2026-02-16 15:36:13,375 DEBUG: STREAM b'IDAT' 23204 8192
+2026-02-16 15:36:14,205 INFO: Initializing Rembg session (u2netp)...
+2026-02-16 15:36:14,525 INFO: Rembg session initialized successfully.
+2026-02-16 15:36:14,525 DEBUG: STREAM b'IHDR' 16 13
+2026-02-16 15:36:14,525 DEBUG: STREAM b'IDAT' 41 65536
+2026-02-16 15:36:17,059 DEBUG: STREAM b'IHDR' 16 13
+2026-02-16 15:36:17,059 DEBUG: STREAM b'IDAT' 41 65536
+2026-02-16 15:36:17,095 DEBUG: STREAM b'IHDR' 16 13
+2026-02-16 15:36:17,096 DEBUG: STREAM b'caBX' 41 96243
+2026-02-16 15:36:17,096 DEBUG: b'caBX' 41 96243 (unknown)
+2026-02-16 15:36:17,096 DEBUG: STREAM b'IDAT' 96296 65536
+2026-02-16 15:36:18,298 INFO: 127.0.0.1 - - [16/Feb/2026 15:36:18] "POST /process HTTP/1.1" 200 -
+2026-02-16 15:36:49,683 INFO: 127.0.0.1 - - [16/Feb/2026 15:36:49] "GET /download/bb09c5c9_output.png HTTP/1.1" 200 -
+2026-02-16 15:38:18,420 INFO:  * Detected change in 'E:\\XRI\\clear_football-photboth\\app.py', reloading
+2026-02-16 15:38:18,912 INFO:  * Restarting with stat
+2026-02-16 15:38:21,810 WARNING:  * Debugger is active!
+2026-02-16 15:38:21,814 INFO:  * Debugger PIN: 101-985-682
+2026-02-16 15:39:42,675 INFO: 127.0.0.1 - - [16/Feb/2026 15:39:42] "GET /download/bb09c5c9_output.png HTTP/1.1" 200 -
+2026-02-16 15:39:52,754 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-02-16 15:39:52,754 INFO: [33mPress CTRL+C to quit[0m
+2026-02-16 15:39:52,756 INFO:  * Restarting with stat
+2026-02-16 15:39:55,512 WARNING:  * Debugger is active!
+2026-02-16 15:39:55,517 INFO:  * Debugger PIN: 101-985-682
+2026-02-16 15:40:08,121 INFO: Removing background for: E:\XRI\clear_football-photboth\uploads\1c2a6f4b_styleswap-black-leather-biker.png
+2026-02-16 15:40:08,157 DEBUG: STREAM b'IHDR' 16 13
+2026-02-16 15:40:08,158 DEBUG: STREAM b'caBX' 41 23151
+2026-02-16 15:40:08,158 DEBUG: b'caBX' 41 23151 (unknown)
+2026-02-16 15:40:08,158 DEBUG: STREAM b'IDAT' 23204 8192
+2026-02-16 15:40:08,936 INFO: Initializing Rembg session (u2netp)...
+2026-02-16 15:40:09,154 INFO: Rembg session initialized successfully.
+2026-02-16 15:40:09,154 DEBUG: STREAM b'IHDR' 16 13
+2026-02-16 15:40:09,154 DEBUG: STREAM b'IDAT' 41 65536
+2026-02-16 15:40:11,975 DEBUG: STREAM b'IHDR' 16 13
+2026-02-16 15:40:11,976 DEBUG: STREAM b'IDAT' 41 65536
+2026-02-16 15:40:12,009 DEBUG: STREAM b'IHDR' 16 13
+2026-02-16 15:40:12,009 DEBUG: STREAM b'caBX' 41 96243
+2026-02-16 15:40:12,009 DEBUG: b'caBX' 41 96243 (unknown)
+2026-02-16 15:40:12,009 DEBUG: STREAM b'IDAT' 96296 65536
+2026-02-16 15:40:13,066 INFO: 127.0.0.1 - - [16/Feb/2026 15:40:13] "POST /process HTTP/1.1" 200 -
+2026-02-16 15:40:27,298 INFO: 127.0.0.1 - - [16/Feb/2026 15:40:27] "GET /download/1c2a6f4b_output.png HTTP/1.1" 200 -
+2026-02-16 15:42:08,974 INFO:  * Detected change in 'E:\\XRI\\clear_football-photboth\\app.py', reloading
+2026-02-16 15:42:09,398 INFO:  * Restarting with stat
+2026-02-16 15:42:12,385 WARNING:  * Debugger is active!
+2026-02-16 15:42:12,390 INFO:  * Debugger PIN: 101-985-682
+2026-02-16 15:42:29,938 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-02-16 15:42:29,938 INFO: [33mPress CTRL+C to quit[0m
+2026-02-16 15:42:29,940 INFO:  * Restarting with stat
+2026-02-16 15:42:32,952 WARNING:  * Debugger is active!
+2026-02-16 15:42:32,957 INFO:  * Debugger PIN: 101-985-682
+2026-02-16 15:42:35,468 INFO: 127.0.0.1 - - [16/Feb/2026 15:42:35] "GET /download/1c2a6f4b_output.png HTTP/1.1" 200 -
+2026-02-16 15:42:39,434 INFO: Removing background for: E:\XRI\clear_football-photboth\uploads\b51db15f_styleswap-black-leather-biker.png
+2026-02-16 15:42:39,484 DEBUG: STREAM b'IHDR' 16 13
+2026-02-16 15:42:39,484 DEBUG: STREAM b'caBX' 41 23151
+2026-02-16 15:42:39,484 DEBUG: b'caBX' 41 23151 (unknown)
+2026-02-16 15:42:39,485 DEBUG: STREAM b'IDAT' 23204 8192
+2026-02-16 15:42:40,366 INFO: Initializing Rembg session (u2netp)...
+2026-02-16 15:42:40,581 INFO: Rembg session initialized successfully.
+2026-02-16 15:42:40,582 DEBUG: STREAM b'IHDR' 16 13
+2026-02-16 15:42:40,582 DEBUG: STREAM b'IDAT' 41 65536
+2026-02-16 15:42:42,961 DEBUG: STREAM b'IHDR' 16 13
+2026-02-16 15:42:42,962 DEBUG: STREAM b'IDAT' 41 65536
+2026-02-16 15:42:42,995 DEBUG: STREAM b'IHDR' 16 13
+2026-02-16 15:42:42,995 DEBUG: STREAM b'caBX' 41 96243
+2026-02-16 15:42:42,995 DEBUG: b'caBX' 41 96243 (unknown)
+2026-02-16 15:42:42,996 DEBUG: STREAM b'IDAT' 96296 65536
+2026-02-16 15:42:44,160 INFO: 127.0.0.1 - - [16/Feb/2026 15:42:44] "POST /process HTTP/1.1" 200 -
+2026-02-16 15:42:53,437 INFO: 127.0.0.1 - - [16/Feb/2026 15:42:53] "GET /download/b51db15f_output.png HTTP/1.1" 200 -
+2026-02-16 15:43:47,281 INFO: Removing background for: E:\XRI\clear_football-photboth\uploads\c1a82eea_StyleSwap-1769246370932.png
+2026-02-16 15:43:48,039 DEBUG: STREAM b'IHDR' 16 13
+2026-02-16 15:43:48,039 DEBUG: STREAM b'IDAT' 41 65536
+2026-02-16 15:43:50,833 DEBUG: STREAM b'IHDR' 16 13
+2026-02-16 15:43:50,833 DEBUG: STREAM b'IDAT' 41 65536
+2026-02-16 15:43:50,865 DEBUG: STREAM b'IHDR' 16 13
+2026-02-16 15:43:50,865 DEBUG: STREAM b'caBX' 41 96243
+2026-02-16 15:43:50,865 DEBUG: b'caBX' 41 96243 (unknown)
+2026-02-16 15:43:50,866 DEBUG: STREAM b'IDAT' 96296 65536
+2026-02-16 15:43:52,029 INFO: 127.0.0.1 - - [16/Feb/2026 15:43:52] "POST /process HTTP/1.1" 200 -
+2026-02-16 15:43:58,087 INFO: 127.0.0.1 - - [16/Feb/2026 15:43:58] "GET /download/c1a82eea_output.png HTTP/1.1" 200 -
+2026-02-16 15:45:15,599 INFO:  * Detected change in 'E:\\XRI\\clear_football-photboth\\app.py', reloading
+2026-02-16 15:45:16,048 INFO:  * Restarting with stat
+2026-02-16 15:45:19,098 WARNING:  * Debugger is active!
+2026-02-16 15:45:19,104 INFO:  * Debugger PIN: 101-985-682
+2026-02-16 15:45:32,286 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-02-16 15:45:32,286 INFO: [33mPress CTRL+C to quit[0m
+2026-02-16 15:45:32,288 INFO:  * Restarting with stat
+2026-02-16 15:45:34,911 WARNING:  * Debugger is active!
+2026-02-16 15:45:34,916 INFO:  * Debugger PIN: 101-985-682
+2026-02-16 15:45:36,804 INFO: Removing background for: E:\XRI\clear_football-photboth\uploads\05d6c141_StyleSwap-1769246370932.png
+2026-02-16 15:45:37,492 INFO: Initializing Rembg session (u2netp)...
+2026-02-16 15:45:37,680 INFO: Rembg session initialized successfully.
+2026-02-16 15:45:37,680 DEBUG: STREAM b'IHDR' 16 13
+2026-02-16 15:45:37,680 DEBUG: STREAM b'IDAT' 41 65536
+2026-02-16 15:45:39,994 DEBUG: STREAM b'IHDR' 16 13
+2026-02-16 15:45:39,994 DEBUG: STREAM b'IDAT' 41 65536
+2026-02-16 15:45:40,026 DEBUG: STREAM b'IHDR' 16 13
+2026-02-16 15:45:40,026 DEBUG: STREAM b'caBX' 41 96243
+2026-02-16 15:45:40,026 DEBUG: b'caBX' 41 96243 (unknown)
+2026-02-16 15:45:40,026 DEBUG: STREAM b'IDAT' 96296 65536
+2026-02-16 15:45:41,130 INFO: 127.0.0.1 - - [16/Feb/2026 15:45:41] "POST /process HTTP/1.1" 200 -
+2026-02-16 15:45:49,576 INFO: 127.0.0.1 - - [16/Feb/2026 15:45:49] "GET /download/05d6c141_output.png HTTP/1.1" 200 -
+2026-02-17 18:36:14,481 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-02-17 18:36:14,481 INFO: [33mPress CTRL+C to quit[0m
+2026-02-17 18:36:14,484 INFO:  * Restarting with stat
+2026-02-17 18:36:26,263 INFO: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-02-17 18:36:26,263 INFO: [33mPress CTRL+C to quit[0m
+2026-02-17 18:36:26,265 INFO:  * Restarting with stat
+2026-02-17 18:36:29,046 WARNING:  * Debugger is active!
+2026-02-17 18:36:29,055 INFO:  * Debugger PIN: 101-985-682
+2026-02-17 18:36:49,738 INFO: Removing background for: E:\XRI\clear_football-photboth\uploads\00e160ef_46d24cec-6dab-4158-b503-89bb20881dc8.jpeg
+2026-02-17 18:36:50,199 INFO: Initializing Rembg session (u2netp)...
+2026-02-17 18:36:50,544 INFO: Rembg session initialized successfully.
+2026-02-17 18:36:50,545 DEBUG: STREAM b'IHDR' 16 13
+2026-02-17 18:36:50,545 DEBUG: STREAM b'iCCP' 41 264
+2026-02-17 18:36:50,545 DEBUG: iCCP profile name b'ICC Profile'
+2026-02-17 18:36:50,546 DEBUG: Compression method 0
+2026-02-17 18:36:50,547 DEBUG: STREAM b'IDAT' 317 65536
+2026-02-17 18:36:59,937 DEBUG: STREAM b'IHDR' 16 13
+2026-02-17 18:36:59,937 DEBUG: STREAM b'IDAT' 41 65536
+2026-02-17 18:36:59,983 DEBUG: STREAM b'IHDR' 16 13
+2026-02-17 18:36:59,983 DEBUG: STREAM b'caBX' 41 96243
+2026-02-17 18:36:59,984 DEBUG: b'caBX' 41 96243 (unknown)
+2026-02-17 18:36:59,984 DEBUG: STREAM b'IDAT' 96296 65536
+2026-02-17 18:37:01,166 INFO: 127.0.0.1 - - [17/Feb/2026 18:37:01] "POST /process HTTP/1.1" 200 -
+2026-02-17 18:37:11,792 INFO: 127.0.0.1 - - [17/Feb/2026 18:37:11] "GET /download/00e160ef_output.png HTTP/1.1" 200 -
+2026-02-17 18:37:32,624 INFO: Removing background for: E:\XRI\clear_football-photboth\uploads\87196266_46d24cec-6dab-4158-b503-89bb20881dc8.jpeg
+2026-02-17 18:37:33,204 DEBUG: STREAM b'IHDR' 16 13
+2026-02-17 18:37:33,205 DEBUG: STREAM b'iCCP' 41 264
+2026-02-17 18:37:33,206 DEBUG: iCCP profile name b'ICC Profile'
+2026-02-17 18:37:33,206 DEBUG: Compression method 0
+2026-02-17 18:37:33,206 DEBUG: STREAM b'IDAT' 317 65536
+2026-02-17 18:37:42,586 DEBUG: STREAM b'IHDR' 16 13
+2026-02-17 18:37:42,586 DEBUG: STREAM b'IDAT' 41 65536
+2026-02-17 18:37:42,622 DEBUG: STREAM b'IHDR' 16 13
+2026-02-17 18:37:42,623 DEBUG: STREAM b'caBX' 41 104798
+2026-02-17 18:37:42,623 DEBUG: b'caBX' 41 104798 (unknown)
+2026-02-17 18:37:42,623 DEBUG: STREAM b'IDAT' 104851 65536
+2026-02-17 18:37:43,993 INFO: 127.0.0.1 - - [17/Feb/2026 18:37:43] "POST /process HTTP/1.1" 200 -
+2026-02-17 18:37:49,324 INFO: 127.0.0.1 - - [17/Feb/2026 18:37:49] "GET /download/87196266_output.png HTTP/1.1" 200 -

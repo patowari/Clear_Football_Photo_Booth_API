@@ -15,6 +15,8 @@
             --surface-accent: #1f1f25;
             --text: #ffffff;
             --text-dim: #a0a0ab;
+            --danger: #ff4d4d;
+            --danger-hover: #cc3d3d;
             --glass: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.1);
         }
@@ -110,8 +112,7 @@
         }
 
         .btn {
-            width: 100%;
-            padding: 0.8rem;
+            padding: 0.8rem 1.5rem;
             background: var(--primary);
             color: white;
             border: none;
@@ -120,6 +121,10 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
 
         .btn:hover {
@@ -127,8 +132,16 @@
             transform: translateY(-2px);
         }
 
+        .btn-danger {
+            background: var(--danger);
+        }
+
+        .btn-danger:hover {
+            background: var(--danger-hover);
+        }
+
         .error-msg {
-            color: #ff4d4d;
+            color: var(--danger);
             font-size: 0.85rem;
             margin-top: 1rem;
             text-align: center;
@@ -162,24 +175,57 @@
         .btn-outline {
             background: transparent;
             border: 1px solid var(--glass-border);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
             color: var(--text);
             cursor: pointer;
             transition: all 0.3s ease;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .btn-outline:hover {
             background: var(--glass);
+            border-color: var(--text-dim);
         }
 
         .btn-logout {
-            color: #ff4d4d;
+            color: var(--danger);
             border-color: rgba(255, 77, 77, 0.2);
         }
 
         .btn-logout:hover {
             background: rgba(255, 77, 77, 0.1);
+        }
+
+        /* Bulk Actions Bar */
+        .bulk-actions-bar {
+            background: var(--surface);
+            padding: 1rem 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--primary);
+            position: sticky;
+            top: 1rem;
+            z-index: 100;
+            box-shadow: 0 10px 30px rgba(0, 0, 132, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .bulk-info {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .selected-count {
+            font-weight: 700;
+            color: var(--primary);
         }
 
         /* Tabs */
@@ -235,6 +281,25 @@
             position: relative;
         }
 
+        .image-card.selected {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(0, 132, 255, 0.3);
+        }
+
+        .checkbox-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+        }
+
+        .image-checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
         .image-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -242,9 +307,10 @@
         }
 
         .image-container {
-            aspect-ratio: 1/1;
+            aspect-ratio: 2/3;
             overflow: hidden;
             background: #000;
+            cursor: pointer;
         }
 
         .image-container img {
@@ -252,10 +318,6 @@
             height: 100%;
             object-fit: contain;
             transition: transform 0.5s ease;
-        }
-
-        .image-card:hover .image-container img {
-            transform: scale(1.05);
         }
 
         .image-info {
@@ -328,6 +390,17 @@
                 gap: 1.5rem;
                 text-align: center;
             }
+
+            .bulk-actions-bar {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .bulk-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
         }
     </style>
 </head>
@@ -348,7 +421,7 @@
                     <label>Password</label>
                     <input type="password" id="password" placeholder="••••••••" required>
                 </div>
-                <button type="submit" class="btn">Sign In</button>
+                <button type="submit" class="btn" style="width: 100%">Sign In</button>
                 <div class="error-msg" id="login-error">Invalid email or password</div>
             </form>
         </div>
@@ -358,19 +431,53 @@
     <div id="dashboard">
         <div class="container">
             <header>
-                <div class="logo">Clear Men <span style="color: var(--primary)">Admin</span> <span id="image-count"
+                <div class="logo">Clear Men <span style="color: var(--primary)">Admin</span> <span
+                        id="image-count-title"
                         style="font-size: 0.9rem; font-weight: 400; color: var(--text-dim); margin-left: 1rem;"></span>
                 </div>
                 <div class="header-actions">
-                    <button class="btn-outline" id="refresh-btn">Refresh Data</button>
+                    <button class="btn-outline" id="refresh-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" />
+                        </svg>
+                        Refresh Data
+                    </button>
                     <button class="btn-outline btn-logout" id="logout-btn">Logout</button>
                 </div>
             </header>
 
-            <div class="tabs">
-                <div class="tab active" onclick="switchTab('outputs')">Generated Images <span id="out-count"></span>
+            <div class="bulk-actions-bar" id="bulk-bar">
+                <div class="bulk-info">
+                    <span><span class="selected-count" id="selected-count">0</span> items selected</span>
+                    <button class="btn-outline" id="select-all-btn">Select All</button>
+                    <button class="btn-outline" id="deselect-all-btn">Deselect All</button>
                 </div>
-                <div class="tab" onclick="switchTab('uploads')">Uploaded Images <span id="up-count"></span></div>
+                <div class="header-actions">
+                    <button class="btn" id="bulk-download-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                        </svg>
+                        Download Selected (ZIP)
+                    </button>
+                    <button class="btn btn-danger" id="bulk-delete-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2M10 11v6M14 11v6" />
+                        </svg>
+                        Delete Selected
+                    </button>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <div class="tab active" id="tab-outputs" onclick="switchTab('outputs')">Generated Images <span
+                        id="out-count"></span></div>
+                <div class="tab" id="tab-uploads" onclick="switchTab('uploads')">Uploaded Images <span
+                        id="up-count"></span></div>
             </div>
 
             <div class="loader" id="loader">
@@ -397,14 +504,19 @@
         const emptyState = document.getElementById('empty-state');
         const refreshBtn = document.getElementById('refresh-btn');
         const logoutBtn = document.getElementById('logout-btn');
+        const bulkBar = document.getElementById('bulk-bar');
+        const selectedCountEl = document.getElementById('selected-count');
 
         let currentTab = 'outputs';
         let imageData = { outputs: [], uploads: [] };
+        let selectedFiles = new Set();
 
         async function fetchData() {
             loader.style.display = 'flex';
             imageGallery.innerHTML = '';
             emptyState.style.display = 'none';
+            selectedFiles.clear();
+            updateBulkBar();
 
             try {
                 const response = await fetch('/api/admin/images');
@@ -428,14 +540,14 @@
 
         function switchTab(tabName) {
             currentTab = tabName;
+            selectedFiles.clear();
+            updateBulkBar();
 
             // Update UI
             document.querySelectorAll('.tab').forEach(tab => {
                 tab.classList.remove('active');
-                if (tab.textContent.toLowerCase().includes(tabName)) {
-                    tab.classList.add('active');
-                }
             });
+            document.getElementById(`tab-${tabName}`).classList.add('active');
 
             renderCurrentTab();
         }
@@ -457,22 +569,155 @@
                 const date = new Date(img.timestamp * 1000).toLocaleString();
                 const card = document.createElement('div');
                 card.className = 'image-card';
+                card.id = `card-${img.filename}`;
+
+                if (selectedFiles.has(img.filename)) {
+                    card.classList.add('selected');
+                }
+
                 card.innerHTML = `
-                    <div class="image-container">
+                    <div class="checkbox-container">
+                        <input type="checkbox" class="image-checkbox" 
+                            ${selectedFiles.has(img.filename) ? 'checked' : ''} 
+                            onchange="toggleSelect('${img.filename}')">
+                    </div>
+                    <div class="image-container" onclick="toggleSelect('${img.filename}')">
                         <img src="${img.url}?inline=true" alt="${img.filename}" loading="lazy">
                     </div>
                     <div class="image-info">
                         <div class="image-name">${img.filename}</div>
                         <div style="font-size: 0.75rem; color: var(--text-dim); margin-bottom: 0.5rem;">${date}</div>
                         <div class="image-actions">
-                            <a href="${img.url}" download class="btn-sm btn" style="background: var(--primary)">Download</a>
-                            <a href="${img.url}?inline=true" target="_blank" class="btn-sm btn-outline">View Full</a>
+                            <a href="${img.url}" download class="btn-sm btn">Download</a>
+                            <button onclick="deleteSingle('${img.filename}')" class="btn-sm btn btn-danger">Delete</button>
                         </div>
                     </div>
                 `;
                 imageGallery.appendChild(card);
             });
         }
+
+        function toggleSelect(filename) {
+            const card = document.getElementById(`card-${filename}`);
+            const checkbox = card.querySelector('.image-checkbox');
+
+            if (selectedFiles.has(filename)) {
+                selectedFiles.delete(filename);
+                card.classList.remove('selected');
+                checkbox.checked = false;
+            } else {
+                selectedFiles.add(filename);
+                card.classList.add('selected');
+                checkbox.checked = true;
+            }
+            updateBulkBar();
+        }
+
+        function updateBulkBar() {
+            const count = selectedFiles.size;
+            selectedCountEl.textContent = count;
+            bulkBar.style.display = count > 0 ? 'flex' : 'none';
+        }
+
+        document.getElementById('select-all-btn').onclick = () => {
+            const list = imageData[currentTab] || [];
+            list.forEach(img => {
+                selectedFiles.add(img.filename);
+                const card = document.getElementById(`card-${img.filename}`);
+                if (card) {
+                    card.classList.add('selected');
+                    card.querySelector('.image-checkbox').checked = true;
+                }
+            });
+            updateBulkBar();
+        };
+
+        document.getElementById('deselect-all-btn').onclick = () => {
+            selectedFiles.clear();
+            document.querySelectorAll('.image-card').forEach(card => {
+                card.classList.remove('selected');
+                card.querySelector('.image-checkbox').checked = false;
+            });
+            updateBulkBar();
+        };
+
+        async function deleteSingle(filename) {
+            if (!confirm(`Are you sure you want to delete ${filename}?`)) return;
+
+            try {
+                const response = await fetch('/api/admin/delete-images', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        filenames: [filename],
+                        category: currentTab
+                    })
+                });
+
+                if (response.ok) {
+                    fetchData();
+                } else {
+                    alert('Failed to delete image');
+                }
+            } catch (error) {
+                console.error('Delete error:', error);
+            }
+        }
+
+        document.getElementById('bulk-delete-btn').onclick = async () => {
+            const count = selectedFiles.size;
+            if (!confirm(`Are you sure you want to delete ${count} selected images?`)) return;
+
+            try {
+                const response = await fetch('/api/admin/delete-images', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        filenames: Array.from(selectedFiles),
+                        category: currentTab
+                    })
+                });
+
+                if (response.ok) {
+                    fetchData();
+                } else {
+                    alert('Failed to delete images');
+                }
+            } catch (error) {
+                console.error('Bulk delete error:', error);
+            }
+        };
+
+        document.getElementById('bulk-download-btn').onclick = async () => {
+            const filenames = Array.from(selectedFiles);
+
+            try {
+                const response = await fetch('/api/admin/bulk-download', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        filenames: filenames,
+                        category: currentTab
+                    })
+                });
+
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `bulk_${currentTab}.zip`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    a.remove();
+                } else {
+                    alert('Failed to create ZIP');
+                }
+            } catch (error) {
+                console.error('Bulk download error:', error);
+            }
+        };
 
         function showDashboard() {
             loginScreen.style.display = 'none';

@@ -11,6 +11,8 @@ import uuid
 import io
 import logging
 import traceback
+import zipfile
+from datetime import datetime
 
 # 1. SETUP LOGGING
 # In cPanel, logs are your best friend since you can't see the console easily.
@@ -94,8 +96,8 @@ def remove_background(image_path):
     return Image.open(io.BytesIO(output_data)).convert("RGBA")
 
 def fit_person_to_frame(person_image, frame_image):
-    """Fit person to strict 1536x1024 frame while keeping aspect ratio intact"""
-    target_width, target_height = 1536, 1024
+    """Fit person to strict 1024x1536 frame while keeping aspect ratio intact and aligning to bottom"""
+    target_width, target_height = 1024, 1536
     
     # 1. Prepare Frame (The Background)
     if frame_image.size != (target_width, target_height):
@@ -103,23 +105,33 @@ def fit_person_to_frame(person_image, frame_image):
     result = frame_image.copy().convert("RGBA")
     
     # 2. Prepare Person (The Subject)
+    # CROP transparent margins to remove any natural gaps from the original photo
+    bbox = person_image.getbbox()
+    if bbox:
+        person_image = person_image.crop(bbox)
+        
     person_width, person_height = person_image.size
     person_ratio = person_width / person_height
     target_ratio = target_width / target_height
     
-    # Calculate scale to fit within frame
+    # Calculate scale to fit within frame (usually we want to fit width or height)
+    # Reduced size to 85% of frame dimensions for better aesthetics
+    scale_factor = 0.85
+    
     if person_ratio > target_ratio:
-        new_width = target_width
-        new_height = int(target_width / person_ratio)
+        # Subject is wider than frame ratio
+        new_width = int(target_width * scale_factor)
+        new_height = int(new_width / person_ratio)
     else:
-        new_height = target_height
-        new_width = int(target_height * person_ratio)
+        # Subject is taller than frame ratio (standard case)
+        new_height = int(target_height * scale_factor)
+        new_width = int(new_height * person_ratio)
     
     person_resized = person_image.resize((new_width, new_height), Image.Resampling.LANCZOS)
     
-    # 3. Overlay (Center the person)
+    # 3. Overlay (Center horizontally, align to BOTTOM)
     x_offset = (target_width - new_width) // 2
-    y_offset = (target_height - new_height) // 2
+    y_offset = target_height - new_height
     
     result.paste(person_resized, (x_offset, y_offset), person_resized)
     return result
@@ -290,6 +302,75 @@ def list_images():
 def admin_logout():
     flask_session.pop('admin_logged_in', None)
     return jsonify({'success': True})
+
+@app.route('/api/admin/delete-images', methods=['POST'])
+def delete_images():
+    if not flask_session.get('admin_logged_in'):
+        return jsonify({'error': 'Unauthorized'}), 401
+    
+    data = request.json
+    filenames = data.get('filenames', [])
+    category = data.get('category') # 'outputs' or 'uploads'
+    
+    if not filenames or category not in ['outputs', 'uploads']:
+        return jsonify({'error': 'Invalid request'}), 400
+        
+    folder = app.config['OUTPUT_FOLDER'] if category == 'outputs' else app.config['UPLOAD_FOLDER']
+    
+    deleted_count = 0
+    errors = []
+    
+    for filename in filenames:
+        # Security check: ensure no directory traversal
+        filename = os.path.basename(filename)
+        file_path = os.path.join(folder, filename)
+        
+        try:
+            if os.path.exists(file_path):
+                os.remove(file_path)
+                deleted_count += 1
+        except Exception as e:
+            errors.append(f"Failed to delete {filename}: {str(e)}")
+            
+    return jsonify({
+        'success': True, 
+        'deleted_count': deleted_count,
+        'errors': errors
+    })
+
+@app.route('/api/admin/bulk-download', methods=['POST'])
+def bulk_download():
+    if not flask_session.get('admin_logged_in'):
+        return jsonify({'error': 'Unauthorized'}), 401
+        
+    data = request.json
+    filenames = data.get('filenames', [])
+    category = data.get('category')
+    
+    if not filenames or category not in ['outputs', 'uploads']:
+        return jsonify({'error': 'Invalid request'}), 400
+        
+    folder = app.config['OUTPUT_FOLDER'] if category == 'outputs' else app.config['UPLOAD_FOLDER']
+    
+    # Create ZIP in memory
+    memory_file = io.BytesIO()
+    with zipfile.ZipFile(memory_file, 'w') as zf:
+        for filename in filenames:
+            filename = os.path.basename(filename)
+            file_path = os.path.join(folder, filename)
+            if os.path.exists(file_path):
+                zf.write(file_path, filename)
+                
+    memory_file.seek(0)
+    
+    zip_filename = f"bulk_{category}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.zip"
+    
+    return send_file(
+        memory_file,
+        mimetype='application/zip',
+        as_attachment=True,
+        download_name=zip_filename
+    )
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

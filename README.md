@@ -5,7 +5,7 @@ A high-performance Flask API for creating custom football-themed photo booth ima
 ## ✨ Features
 
 - **Advanced AI Background Removal:** Uses `rembg` with Alpha Matting for high-accuracy subject extraction.
-- **Strict Resolution:** Forces all outputs to **1536x1024** px without stretching the subject.
+- **Strict Resolution:** Forces all outputs to **1024x1536** px without stretching the subject.
 - **Dynamic Framing:** Choose from multiple football-themed background frames.
 - **QR Code Integration:** Automatically generates a QR code on the final image for instant downloads.
 - **Instant Processing:** Fast turnaround from upload to processed result.
@@ -33,7 +33,7 @@ pip install -r requirements.txt
 ```
 
 ### 3. Setup
-The application requires a `frames/` directory containing images named `frame_1.png` through `frame_6.png` with dimensions 1536x1024.
+The application requires a `frames/` directory containing images named `frame_1.png` through `frame_6.png` with dimensions 1024x1536.
 
 ### 4. Hosting on cPanel (Shared Hosting)
 1.  Upload all files to your cPanel directory (e.g., `public_html` or a subfolder).
